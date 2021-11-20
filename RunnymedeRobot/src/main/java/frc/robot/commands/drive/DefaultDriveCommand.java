@@ -33,6 +33,7 @@ public class DefaultDriveCommand extends CommandBase {
 	public void execute() {
 
 		// FIXME: What should we put here?
+		driveSubsystem.setMotorSpeeds(0, 0);
 	}
 
 	// Called once the command ends or is interrupted.
