@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
@@ -18,9 +17,6 @@ public class DriveSubsystem extends SubsystemBase {
 	// The motors on the right side of the drive.
 	private final MotorControllerGroup rightMotors = new MotorControllerGroup(
 			new PWMSparkMax(DriveConstants.RIGHT_MOTOR_PORT));
-
-	// The robot's drive
-	private final DifferentialDrive differentialDrive = new DifferentialDrive(leftMotors, rightMotors);
 
 	// The left-side drive encoder
 	private final Encoder leftEncoder = new Encoder(DriveConstants.LEFT_ENCODER_PORTS[0],
@@ -38,7 +34,8 @@ public class DriveSubsystem extends SubsystemBase {
 		// We need to invert one side of the drivetrain so that positive voltages
 		// result in both sides moving forward. Depending on how your robot's
 		// gearbox is constructed, you might have to invert the left side instead.
-		rightMotors.setInverted(true);
+		leftMotors.setInverted(DriveConstants.LEFT_MOTOR_REVERSED);
+		rightMotors.setInverted(DriveConstants.RIGHT_MOTOR_REVERSED);
 
 		// Sets the distance per pulse for the encoders
 		leftEncoder.setDistancePerPulse(DriveConstants.ENCODER_DISTANCE_PER_PULSE);
