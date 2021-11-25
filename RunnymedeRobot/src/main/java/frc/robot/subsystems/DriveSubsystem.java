@@ -1,22 +1,24 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
 public class DriveSubsystem extends SubsystemBase {
 
 	// The motors on the left side of the drive.
-	private final MotorControllerGroup leftMotors = new MotorControllerGroup(
-			new PWMSparkMax(DriveConstants.LEFT_MOTOR_PORT));
+	private final VictorSPX leftMotors =
+			new VictorSPX(DriveConstants.LEFT_MOTOR_PORT);
 
 	// The motors on the right side of the drive.
-	private final MotorControllerGroup rightMotors = new MotorControllerGroup(
-			new PWMSparkMax(DriveConstants.RIGHT_MOTOR_PORT));
+	private final TalonSRX rightMotors =
+			new TalonSRX(DriveConstants.RIGHT_MOTOR_PORT);
 
 	// The left-side drive encoder
 	private final Encoder leftEncoder = new Encoder(DriveConstants.LEFT_ENCODER_PORTS[0],
@@ -43,8 +45,8 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void setMotorSpeeds(double leftSpeed, double rightSpeed) {
-		leftMotors.set(leftSpeed);
-		rightMotors.set(rightSpeed);
+		leftMotors.set(ControlMode.PercentOutput, leftSpeed);
+		rightMotors.set(ControlMode.PercentOutput, rightSpeed);
 	}
 
 	/** Resets the drive encoders to currently read a position of 0. */
