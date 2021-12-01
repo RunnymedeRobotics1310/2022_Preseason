@@ -34,7 +34,10 @@ public class DefaultDriveCommand extends CommandBase {
 	public void execute() {
 
 		// FIXME: What should we put here?
-		driveSubsystem.setMotorSpeeds(0.5, 0.5);
+
+		double leftY = driverController.getRawAxis(1);
+		double rightY = driverController.getRawAxis(5);
+		driveSubsystem.setMotorSpeeds(leftY, rightY);
 	}
 
 	// Called once the command ends or is interrupted.
