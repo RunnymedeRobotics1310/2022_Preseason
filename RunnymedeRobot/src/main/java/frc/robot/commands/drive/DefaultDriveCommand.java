@@ -43,7 +43,7 @@ public class DefaultDriveCommand extends CommandBase {
 			modifier = 1.0;
 		}
 		else {
-			modifier = 0.5;
+			modifier = 0.8;
 		}
 			
 		driveSubsystem.setMotorSpeeds(left * modifier, right * modifier);
