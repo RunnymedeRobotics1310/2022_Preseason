@@ -33,7 +33,7 @@ public class DefaultDriveCommand extends CommandBase {
 	@Override
 	public void execute() {
 
-		// FIXME: What should we put here?
+		// What else to put here ladies and gentlemen?
 
 		double leftY = driverController.getRawAxis(1);
 		double rightY = driverController.getRawAxis(5);
