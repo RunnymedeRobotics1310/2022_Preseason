@@ -13,8 +13,8 @@ import frc.robot.Constants.DriveConstants;
 public class DriveSubsystem extends SubsystemBase {
 
 	// The motors on the left side of the drive.
-	private final VictorSPX leftMotors =
-			new VictorSPX(DriveConstants.LEFT_MOTOR_PORT);
+	private final TalonSRX leftMotors =
+			new TalonSRX(DriveConstants.LEFT_MOTOR_PORT);
 
 	// The motors on the right side of the drive.
 	private final TalonSRX rightMotors =

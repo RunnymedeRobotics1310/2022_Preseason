@@ -18,8 +18,8 @@ public final class Constants {
 
 	public static final class DriveConstants {
 
-		public static final int LEFT_MOTOR_PORT = 0;
-		public static final int RIGHT_MOTOR_PORT = 2;
+		public static final int LEFT_MOTOR_PORT = 10;
+		public static final int RIGHT_MOTOR_PORT = 20;
 		public static final boolean LEFT_MOTOR_REVERSED = false;
 		public static final boolean RIGHT_MOTOR_REVERSED = true;
 
