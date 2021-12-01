@@ -1,5 +1,6 @@
 package frc.robot.commands.drive;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
@@ -7,14 +8,14 @@ import frc.robot.subsystems.DriveSubsystem;
 public class DefaultDriveCommand extends CommandBase {
 
 	private final DriveSubsystem driveSubsystem;
-	private final PS4Controller driverController;
+	private final Joystick driverController;
 
 	/**
 	 * Creates a new ExampleCommand.
 	 *
 	 * @param driveSubsystem The subsystem used by this command.
 	 */
-	public DefaultDriveCommand(PS4Controller driverController, DriveSubsystem driveSubsystem) {
+	public DefaultDriveCommand(Joystick driverController, DriveSubsystem driveSubsystem) {
 
 		this.driverController = driverController;
 		this.driveSubsystem = driveSubsystem;

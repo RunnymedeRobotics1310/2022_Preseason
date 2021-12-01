@@ -5,7 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.PS4Controller;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -29,7 +29,7 @@ public class RobotContainer {
 	private final Command autonomousCommand = new InstantCommand();
 
 	// The driver's controller
-	private final PS4Controller driverController = new PS4Controller(OiConstants.DRIVER_CONTROLLER_PORT);
+	private final Joystick driverController = new Joystick(OiConstants.DRIVER_CONTROLLER_PORT);
 
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
