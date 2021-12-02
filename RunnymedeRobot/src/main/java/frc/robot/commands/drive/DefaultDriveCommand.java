@@ -37,15 +37,13 @@ public class DefaultDriveCommand extends CommandBase {
 
 		double leftY = driverController.getRawAxis(1);
 		double rightY = driverController.getRawAxis(5);
-		Boolean boost;
+		boolean boost = false;
 
 		if (driverController.getRawButton(5) || driverController.getRawButton(6)){
 			boost = true;
-		} else {
-			boost = false;
 		}
 
-		if (boost == false) {
+		if (!boost) {
 			//Not sure if this is a good speed!
 			driveSubsystem.setMotorSpeeds(leftY/2, rightY/2);
 		} else {
