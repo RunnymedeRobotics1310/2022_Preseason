@@ -31,9 +31,20 @@ public class DefaultDriveCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		
+		double leftWheel = driverController.getRawAxis(1) + 0.5*driverController.getRawAxis(0);
+		double rightWheel = driverController.getRawAxis(1) - 0.5*driverController.getRawAxis(0);
+		boolean boost = false;
 
-		// FIXME: What should we put here?
-		driveSubsystem.setMotorSpeeds(0.5, 0.5);
+		if (driverController.getRawButton(5) || driverController.getRawButton(6)){
+			boost = true;
+		}
+
+		if (!boost) {
+			driveSubsystem.setMotorSpeeds(leftWheel/2, rightWheel/2);
+		} else {
+			driveSubsystem.setMotorSpeeds(leftWheel, rightWheel);
+		}
 	}
 
 	// Called once the command ends or is interrupted.
