@@ -32,18 +32,15 @@ public class DefaultDriveCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		double modifier;
 		
 		//tank drive
 		double left = driverController.getRawAxis(1);
 		double right = driverController.getRawAxis(5);
 
 		// turbo boost using bumper buttons
+		double modifier = 0.8;
 		if(driverController.getRawButtonPressed(5) || driverController.getRawButtonPressed(6)) {
 			modifier = 1.0;
-		}
-		else {
-			modifier = 0.8;
 		}
 			
 		driveSubsystem.setMotorSpeeds(left * modifier, right * modifier);
