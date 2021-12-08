@@ -37,8 +37,8 @@ public class DefaultDriveCommand extends CommandBase {
 
 		double leftY = -driverController.getRawAxis(1);
 		double rightY = -driverController.getRawAxis(5);
-		double leftT = -driverController.getRawAxis(2);
-		double rightT = -driverController.getRawAxis(3);
+		double leftT = driverController.getRawAxis(2);
+		double rightT = driverController.getRawAxis(3);
 		boolean boost = false;
 
 		if (driverController.getRawButton(5) || driverController.getRawButton(6)){
