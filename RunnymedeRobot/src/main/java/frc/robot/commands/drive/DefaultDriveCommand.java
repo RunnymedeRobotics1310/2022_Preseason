@@ -35,10 +35,10 @@ public class DefaultDriveCommand extends CommandBase {
 
 		// What else to put here ladies and gentlemen?
 
-		double leftY = driverController.getRawAxis(1);
-		double rightY = driverController.getRawAxis(5);
-		double leftT = driverController.getRawAxis(2);
-		double rightT = driverController.getRawAxis(3);
+		double leftY = -driverController.getRawAxis(1);
+		double rightY = -driverController.getRawAxis(5);
+		double leftT = -driverController.getRawAxis(2);
+		double rightT = -driverController.getRawAxis(3);
 		boolean boost = false;
 
 		if (driverController.getRawButton(5) || driverController.getRawButton(6)){
@@ -46,10 +46,10 @@ public class DefaultDriveCommand extends CommandBase {
 		}
 		
 		if (leftT >0) {
-			driveSubsystem.setMotorSpeeds(leftT, -leftT);
+			driveSubsystem.setMotorSpeeds(-leftT, leftT);
 		}
 		else if (rightT >0) {
-			driveSubsystem.setMotorSpeeds(-rightT, rightT);
+			driveSubsystem.setMotorSpeeds(rightT, -rightT);
 		}
 
 		else if (!boost) {
