@@ -32,8 +32,9 @@ public class DefaultDriveCommand extends CommandBase {
 	@Override
 	public void execute() {
 		
-		double leftWheel = driverController.getRawAxis(1) + 0.5*driverController.getRawAxis(0);
-		double rightWheel = driverController.getRawAxis(1) - 0.5*driverController.getRawAxis(0);
+
+		double leftWheel = -1*driverController.getRawAxis(1) + 0.5*driverController.getRawAxis(0); 
+		double rightWheel = -1*driverController.getRawAxis(1) - 0.5*driverController.getRawAxis(0);
 		boolean boost = false;
 
 		if (driverController.getRawButton(5) || driverController.getRawButton(6)){
