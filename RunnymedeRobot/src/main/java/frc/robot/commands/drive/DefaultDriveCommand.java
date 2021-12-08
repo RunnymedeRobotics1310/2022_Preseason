@@ -1,6 +1,5 @@
 package frc.robot.commands.drive;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
@@ -8,14 +7,14 @@ import frc.robot.subsystems.DriveSubsystem;
 public class DefaultDriveCommand extends CommandBase {
 
 	private final DriveSubsystem driveSubsystem;
-	private final Joystick driverController;
+	private final PS4Controller driverController;
 
 	/**
 	 * Creates a new ExampleCommand.
 	 *
 	 * @param driveSubsystem The subsystem used by this command.
 	 */
-	public DefaultDriveCommand(Joystick driverController, DriveSubsystem driveSubsystem) {
+	public DefaultDriveCommand(PS4Controller driverController, DriveSubsystem driveSubsystem) {
 
 		this.driverController = driverController;
 		this.driveSubsystem = driveSubsystem;
@@ -32,11 +31,17 @@ public class DefaultDriveCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		
+		double y = -1*driverController.getRawAxis(1);
+		double x = driverController.getRawAxis(0);
 
-		// What else to put here ladies and gentlemen?
-
-		double leftY = driverController.getRawAxis(1);
-		double rightY = driverController.getRawAxis(5);
+		double leftWheel = -1*driverController.getRawAxis(1) + 0.5*driverController.getRawAxis(0); 
+		double rightWheel = -1*driverController.getRawAxis(1) - 0.5*driverController.getRawAxis(0);
+		/*
+		if (x > 0 && y > 0){
+			return
+		}
+		*/
 		boolean boost = false;
 
 		if (driverController.getRawButton(5) || driverController.getRawButton(6)){
@@ -44,10 +49,9 @@ public class DefaultDriveCommand extends CommandBase {
 		}
 
 		if (!boost) {
-			//Not sure if this is a good speed!
-			driveSubsystem.setMotorSpeeds(leftY/2, rightY/2);
+			driveSubsystem.setMotorSpeeds(leftWheel/2, rightWheel/2);
 		} else {
-			driveSubsystem.setMotorSpeeds(leftY, rightY);
+			driveSubsystem.setMotorSpeeds(leftWheel, rightWheel);
 		}
 	}
 
