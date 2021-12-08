@@ -1,120 +1,81 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
 public class DriveSubsystem extends SubsystemBase {
 
-	// The motors on the left side of the drive.
-	private final TalonSRX leftMotors =
-			new TalonSRX(DriveConstants.LEFT_MOTOR_PORT);
+    // The motors on the left side of the drive.
+    private final TalonSRX leftMotors =
+            new TalonSRX(DriveConstants.LEFT_MOTOR_PORT);
 
-	// The motors on the right side of the drive.
-	private final TalonSRX rightMotors =
-			new TalonSRX(DriveConstants.RIGHT_MOTOR_PORT);
+    // The motors on the right side of the drive.
+    private final TalonSRX rightMotors =
+            new TalonSRX(DriveConstants.RIGHT_MOTOR_PORT);
 
-	// The left-side drive encoder
-	private final Encoder leftEncoder = new Encoder(DriveConstants.LEFT_ENCODER_PORTS[0],
-			DriveConstants.LEFT_ENCODER_PORTS[1], DriveConstants.LEFT_ENCODER_REVERSED);
+    /** Creates a new DriveSubsystem. */
+    public DriveSubsystem() {
+        // We need to invert one side of the drivetrain so that positive voltages
+        // result in both sides moving forward. Depending on how your robot's
+        // gearbox is constructed, you might have to invert the left side instead.
+        leftMotors.setInverted(DriveConstants.LEFT_MOTOR_REVERSED);
+        rightMotors.setInverted(DriveConstants.RIGHT_MOTOR_REVERSED);
 
-	// The right-side drive encoder
-	private final Encoder rightEncoder = new Encoder(DriveConstants.RIGHT_ENCODER_PORTS[0],
-			DriveConstants.RIGHT_ENCODER_PORTS[1], DriveConstants.RIGHT_ENCODER_REVERSED);
+        leftMotors.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,  0);
+        leftMotors.setSelectedSensorPosition(0, 0, 0);
 
-	// The gyro sensor
-	private final Gyro gyro = new ADXRS450_Gyro();
+        rightMotors.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,  0);
+        rightMotors.setSelectedSensorPosition(0, 0, 0);
 
-	/** Creates a new DriveSubsystem. */
-	public DriveSubsystem() {
-		// We need to invert one side of the drivetrain so that positive voltages
-		// result in both sides moving forward. Depending on how your robot's
-		// gearbox is constructed, you might have to invert the left side instead.
-		leftMotors.setInverted(DriveConstants.LEFT_MOTOR_REVERSED);
-		rightMotors.setInverted(DriveConstants.RIGHT_MOTOR_REVERSED);
+    }
 
-		// Sets the distance per pulse for the encoders
-		leftEncoder.setDistancePerPulse(DriveConstants.ENCODER_DISTANCE_PER_PULSE);
-		rightEncoder.setDistancePerPulse(DriveConstants.ENCODER_DISTANCE_PER_PULSE);
-	}
+    /**
+     * Gets the average distance of the two encoders.
+     *
+     * @return the average of the two encoder readings
+     */
+    public double getAverageEncoderDistance() {
+        return (leftMotors.getSelectedSensorPosition() + rightMotors.getSelectedSensorPosition()) / 2;
+    }
 
-	public void setMotorSpeeds(double leftSpeed, double rightSpeed) {
-		leftMotors.set(ControlMode.PercentOutput, leftSpeed);
-		rightMotors.set(ControlMode.PercentOutput, rightSpeed);
-	}
+    /**
+     * Gets the left drive encoder.
+     *
+     * @return the left drive encoder
+     */
+    public double getLeftEncoder() {
+        return leftMotors.getSelectedSensorPosition();
+    }
 
-	/** Resets the drive encoders to currently read a position of 0. */
-	public void resetEncoders() {
-		leftEncoder.reset();
-		rightEncoder.reset();
-	}
+    /**
+     * Gets the right drive encoder.
+     *
+     * @return the right drive encoder
+     */
+    public double getRightEncoder() {
+        return rightMotors.getSelectedSensorPosition();
+    }
 
-	/**
-	 * Gets the average distance of the two encoders.
-	 *
-	 * @return the average of the two encoder readings
-	 */
-	public double getAverageEncoderDistance() {
-		return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2.0;
-	}
+    /** Resets the drive encoders to currently read a position of 0. */
+    public void resetEncoders() {
+        leftMotors.setSelectedSensorPosition(0);
+        rightMotors.setSelectedSensorPosition(0);
+    }
 
-	/**
-	 * Gets the left drive encoder.
-	 *
-	 * @return the left drive encoder
-	 */
-	public Encoder getLeftEncoder() {
-		return leftEncoder;
-	}
+    public void setMotorSpeeds(double leftSpeed, double rightSpeed) {
+        leftMotors.set(ControlMode.PercentOutput, leftSpeed);
+        rightMotors.set(ControlMode.PercentOutput, rightSpeed);
+    }
 
-	/**
-	 * Gets the right drive encoder.
-	 *
-	 * @return the right drive encoder
-	 */
-	public Encoder getRightEncoder() {
-		return rightEncoder;
-	}
+    @Override
+    public void periodic() {
 
-	/** Zeroes the heading of the robot. */
-	public void zeroHeading() {
-		gyro.reset();
-	}
-
-	/**
-	 * Returns the heading of the robot.
-	 *
-	 * @return the robot's heading in degrees, from 0 to 360
-	 */
-	public double getHeading() {
-
-		double heading = gyro.getAngle();
-
-		if (DriveConstants.GYRO_REVERSED) {
-			heading *= -1.0;
-		}
-
-		heading = heading % 360; // Normalize the heading angle to standard compass headings.
-
-		if (heading < 0) {
-			heading += 360;
-		}
-
-		return heading;
-	}
-
-	/**
-	 * Returns the turn rate of the robot.
-	 *
-	 * @return The turn rate of the robot, in degrees per second
-	 */
-	public double getTurnRate() {
-		return gyro.getRate() * (DriveConstants.GYRO_REVERSED ? -1.0 : 1.0);
-	}
+        SmartDashboard.putNumber("Right Motor", rightMotors.getMotorOutputPercent());
+        SmartDashboard.putNumber("Left  Motor", leftMotors.getMotorOutputPercent());
+    }
 }
