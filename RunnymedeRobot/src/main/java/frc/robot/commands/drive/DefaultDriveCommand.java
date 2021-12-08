@@ -46,10 +46,10 @@ public class DefaultDriveCommand extends CommandBase {
 		}
 		
 		if (leftT >0) {
-			driveSubsystem.setMotorSpeeds(-leftT, leftT);
+			driveSubsystem.setMotorSpeeds(leftT, -leftT);
 		}
 		else if (rightT >0) {
-			driveSubsystem.setMotorSpeeds(rightT, -rightT);
+			driveSubsystem.setMotorSpeeds(-rightT, rightT);
 		}
 
 		else if (!boost) {
