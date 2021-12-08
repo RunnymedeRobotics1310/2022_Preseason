@@ -35,8 +35,8 @@ public class DefaultDriveCommand extends CommandBase {
 
 		// What else to put here ladies and gentlemen?
 
-		double leftY = driverController.getRawAxis(1);
-		double rightY = driverController.getRawAxis(5);
+		double leftY = -driverController.getRawAxis(1);
+		double rightY = -driverController.getRawAxis(5);
 		double leftT = driverController.getRawAxis(2);
 		double rightT = driverController.getRawAxis(3);
 		double leftSpeed = leftY;
@@ -56,7 +56,7 @@ public class DefaultDriveCommand extends CommandBase {
 			rightSpeed = -rightT;
 		}
 
-		else if (!boost) {
+		if (!boost) {
 			//Not sure if this is a good speed!
 			driveSubsystem.setMotorSpeeds(leftSpeed/2, rightSpeed/2);
 		} else {
