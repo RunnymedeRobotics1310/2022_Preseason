@@ -2,6 +2,7 @@ package frc.robot.commands.drive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
 
@@ -33,6 +34,7 @@ public class DefaultDriveCommand extends CommandBase {
 	@Override
 	public void execute() {
 
+
 		// What else to put here ladies and gentlemen?
 
 		double leftY = driverController.getRawAxis(1);
@@ -47,10 +49,11 @@ public class DefaultDriveCommand extends CommandBase {
 			//Not sure if this is a good speed!
 			driveSubsystem.setMotorSpeeds(leftY/2, rightY/2);
 		} else {
-			driveSubsystem.setMotorSpeeds(leftY, rightY);
+			// full steam ahead in boost
+			driveSubsystem.setMotorSpeeds(1.0, 1.0);
 		}
 	}
-
+	
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
