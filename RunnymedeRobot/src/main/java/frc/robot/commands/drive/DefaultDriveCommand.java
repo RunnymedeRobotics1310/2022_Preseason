@@ -52,6 +52,16 @@ public class DefaultDriveCommand extends CommandBase {
 			// full steam ahead in boost
 			driveSubsystem.setMotorSpeeds(1.0, 1.0);
 		}
+		if(driverController.getRawButton(5)){
+		driveSubsystem.setMotorSpeeds(-1.0, -1.0);
+		}else{
+		driveSubsystem.setMotorSpeeds(leftY/2, rightY/2);
+		}
+		if(driverController.getRawButton(6)){
+		driveSubsystem.setMotorSpeeds(1.0, 1.0);
+		}else{
+		driveSubsystem.setMotorSpeeds(leftY/2, rightY/2);
+		}
 	}
 	
 	// Called once the command ends or is interrupted.
