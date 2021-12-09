@@ -45,13 +45,6 @@ public class DefaultDriveCommand extends CommandBase {
 			boost = true;
 		}
 
-		if (!boost) {
-			//Not sure if this is a good speed!
-			driveSubsystem.setMotorSpeeds(leftY/2, rightY/2);
-		} else {
-			// full steam ahead in boost
-			driveSubsystem.setMotorSpeeds(1.0, 1.0);
-		}
 		if(driverController.getRawButton(5)){
 		driveSubsystem.setMotorSpeeds(-1.0, -1.0);
 		}else{
