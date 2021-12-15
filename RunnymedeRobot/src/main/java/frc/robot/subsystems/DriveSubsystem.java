@@ -10,11 +10,11 @@ public class DriveSubsystem extends SubsystemBase {
 
     // The motors on the left side of the drive.
     private final CANSparkMax leftMotors =
-            new CANSparkMax(DriveConstants.LEFT_MOTOR_PORT, MotorType.kBrushless);
+            new CANSparkMax(DriveConstants.LEFT_MOTOR_ADDRESS, MotorType.kBrushless);
 
     // The motors on the right side of the drive.
     private final CANSparkMax rightMotors =
-            new CANSparkMax(DriveConstants.RIGHT_MOTOR_PORT, MotorType.kBrushless);
+            new CANSparkMax(DriveConstants.RIGHT_MOTOR_ADDRESS, MotorType.kBrushless);
 
     /** Creates a new DriveSubsystem. */
     public DriveSubsystem() {

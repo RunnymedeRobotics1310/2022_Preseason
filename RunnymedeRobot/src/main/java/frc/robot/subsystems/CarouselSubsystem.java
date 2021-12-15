@@ -10,7 +10,7 @@ public class CarouselSubsystem extends SubsystemBase {
 
     // The motors on the left side of the drive.
     private final CANSparkMax carouselMotor = 
-    		new CANSparkMax(DriveConstants.LEFT_MOTOR_PORT, MotorType.kBrushless);
+    		new CANSparkMax(DriveConstants.LEFT_MOTOR_ADDRESS, MotorType.kBrushless);
 
     /** Creates a new CarouselSubsystem. */
     public CarouselSubsystem() {

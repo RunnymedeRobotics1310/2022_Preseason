@@ -1,14 +1,14 @@
 package frc.robot.commands.drive;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.CarouselSubsystem;
 
 public class DefaultCarouselCommand extends CommandBase {
 
 	private final CarouselSubsystem carouselSubsystem;
 	private final Joystick driverController;
+	private boolean carouselOn = false;
 
 	/**
 	 * Creates a new ExampleCommand.
@@ -32,43 +32,11 @@ public class DefaultCarouselCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		if(driverController.getRawButton(2))
+			carouselOn = !carouselOn;
 
-		// What else to put here ladies and gentlemen?
-
-
-		double leftY = driverController.getRawAxis(1);
-		double leftX = driverController.getRawAxis(0);
-	//	double rightY = driverController.getRawAxis(5);
-	//	double leftT = driverController.getRawAxis(2);
-	//	double rightT = driverController.getRawAxis(3);
-		double leftSpeed = leftY*-1 + leftX;
-		double rightSpeed = leftY*-1 - leftX;
-
-		boolean boost = false;
-
-		if (driverController.getRawButton(5) || driverController.getRawButton(6)){
-			boost = true;
-		}
-		
-
-//		Tank drive with spin and boost
-//		if (leftT >0) {
-//			leftSpeed = -leftT;
-//			rightSpeed = leftT;
-//		}
-//		else if (rightT >0) {
-//			leftSpeed = rightT;
-//			rightSpeed = -rightT;
-//		}
-//
-//		else 
-
-
-		if (!boost) {
-			//Not sure if this is a good speed!
-			driveSubsystem.setMotorSpeeds(leftSpeed/2, rightSpeed/2);
-		} else {
-			driveSubsystem.setMotorSpeeds(leftSpeed, rightSpeed);
+		if(carouselOn) {
+			carouselSubsystem.setMotorSpeed(0.3);
 		}
 	}
 
