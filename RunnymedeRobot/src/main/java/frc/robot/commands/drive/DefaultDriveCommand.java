@@ -35,6 +35,7 @@ public class DefaultDriveCommand extends CommandBase {
 
 		// What else to put here ladies and gentlemen?
 
+
 		double leftY = driverController.getRawAxis(1);
 		double leftX = driverController.getRawAxis(0);
 	//	double rightY = driverController.getRawAxis(5);
@@ -42,12 +43,14 @@ public class DefaultDriveCommand extends CommandBase {
 	//	double rightT = driverController.getRawAxis(3);
 		double leftSpeed = leftY*-1 + leftX;
 		double rightSpeed = leftY*-1 - leftX;
+
 		boolean boost = false;
 
 		if (driverController.getRawButton(5) || driverController.getRawButton(6)){
 			boost = true;
 		}
 		
+
 //		Tank drive with spin and boost
 //		if (leftT >0) {
 //			leftSpeed = -leftT;
@@ -59,6 +62,8 @@ public class DefaultDriveCommand extends CommandBase {
 //		}
 //
 //		else 
+
+
 		if (!boost) {
 			//Not sure if this is a good speed!
 			driveSubsystem.setMotorSpeeds(leftSpeed/2, rightSpeed/2);
