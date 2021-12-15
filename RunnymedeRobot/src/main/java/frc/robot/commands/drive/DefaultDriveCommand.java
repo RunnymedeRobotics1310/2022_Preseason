@@ -37,10 +37,15 @@ public class DefaultDriveCommand extends CommandBase {
 
 		double leftY = -driverController.getRawAxis(1);
 		double rightY = -driverController.getRawAxis(5);
+<<<<<<< Updated upstream
 		double leftT = driverController.getRawAxis(2);
 		double rightT = driverController.getRawAxis(3);
 		double leftSpeed = leftY;
 		double rightSpeed = rightY;
+=======
+		double leftT = -driverController.getRawAxis(2);
+		double rightT = -driverController.getRawAxis(3);
+>>>>>>> Stashed changes
 		boolean boost = false;
 
 		if (driverController.getRawButton(5) || driverController.getRawButton(6)){
