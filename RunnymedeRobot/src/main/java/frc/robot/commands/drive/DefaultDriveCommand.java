@@ -43,8 +43,6 @@ public class DefaultDriveCommand extends CommandBase {
 
 		if(driverController.getRawButton(5)){
 		driveSubsystem.setMotorSpeeds(-1.0, -1.0);
-		}else{
-		driveSubsystem.setMotorSpeeds(leftY/2, rightY/2);
 		}
 		if(driverController.getRawButton(6)){
 		driveSubsystem.setMotorSpeeds(1.0, 1.0);
