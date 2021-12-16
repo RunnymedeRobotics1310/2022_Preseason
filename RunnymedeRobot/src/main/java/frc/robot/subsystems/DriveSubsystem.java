@@ -11,11 +11,15 @@ import frc.robot.Constants.DriveConstants;
 public class DriveSubsystem extends SubsystemBase {
 
     // The motors on the left side of the drive.
-    private final TalonSRX leftMotors =
+    private final TalonSRX leftPrimaryMotor =
             new TalonSRX(DriveConstants.LEFT_MOTOR_PORT);
+    private final TalonSRX leftFollowerMotor =
+            new TalonSRX(DriveConstants.LEFT_MOTOR_PORT+1);
 
     // The motors on the right side of the drive.
-    private final TalonSRX rightMotors =
+    private final TalonSRX rightPrimaryMotor =
+            new TalonSRX(DriveConstants.RIGHT_MOTOR_PORT);
+    private final TalonSRX rightFollowerMotor =
             new TalonSRX(DriveConstants.RIGHT_MOTOR_PORT);
 
     /** Creates a new DriveSubsystem. */
@@ -23,14 +27,17 @@ public class DriveSubsystem extends SubsystemBase {
         // We need to invert one side of the drivetrain so that positive voltages
         // result in both sides moving forward. Depending on how your robot's
         // gearbox is constructed, you might have to invert the left side instead.
-        leftMotors.setInverted(DriveConstants.LEFT_MOTOR_REVERSED);
-        rightMotors.setInverted(DriveConstants.RIGHT_MOTOR_REVERSED);
+        leftPrimaryMotor .setInverted(DriveConstants.LEFT_MOTOR_REVERSED);
+        leftFollowerMotor.setInverted(DriveConstants.LEFT_MOTOR_REVERSED);
+        
+        rightPrimaryMotor .setInverted(DriveConstants.RIGHT_MOTOR_REVERSED);
+        rightFollowerMotor.setInverted(DriveConstants.RIGHT_MOTOR_REVERSED);
 
-        leftMotors.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,  0);
-        leftMotors.setSelectedSensorPosition(0, 0, 0);
+        leftPrimaryMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,  0);
+        leftPrimaryMotor.setSelectedSensorPosition(0, 0, 0);
 
-        rightMotors.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,  0);
-        rightMotors.setSelectedSensorPosition(0, 0, 0);
+        rightPrimaryMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,  0);
+        rightPrimaryMotor.setSelectedSensorPosition(0, 0, 0);
 
     }
 
@@ -40,7 +47,7 @@ public class DriveSubsystem extends SubsystemBase {
      * @return the average of the two encoder readings
      */
     public double getAverageEncoderDistance() {
-        return (leftMotors.getSelectedSensorPosition() + rightMotors.getSelectedSensorPosition()) / 2;
+        return (leftPrimaryMotor.getSelectedSensorPosition() + rightPrimaryMotor.getSelectedSensorPosition()) / 2;
     }
 
     /**
@@ -49,7 +56,7 @@ public class DriveSubsystem extends SubsystemBase {
      * @return the left drive encoder
      */
     public double getLeftEncoder() {
-        return leftMotors.getSelectedSensorPosition();
+        return leftPrimaryMotor.getSelectedSensorPosition();
     }
 
     /**
@@ -58,24 +65,28 @@ public class DriveSubsystem extends SubsystemBase {
      * @return the right drive encoder
      */
     public double getRightEncoder() {
-        return rightMotors.getSelectedSensorPosition();
+        return rightPrimaryMotor.getSelectedSensorPosition();
     }
 
     /** Resets the drive encoders to currently read a position of 0. */
     public void resetEncoders() {
-        leftMotors.setSelectedSensorPosition(0);
-        rightMotors.setSelectedSensorPosition(0);
+        leftPrimaryMotor.setSelectedSensorPosition(0);
+        rightPrimaryMotor.setSelectedSensorPosition(0);
     }
 
     public void setMotorSpeeds(double leftSpeed, double rightSpeed) {
-        leftMotors.set(ControlMode.PercentOutput, leftSpeed);
-        rightMotors.set(ControlMode.PercentOutput, rightSpeed);
+    	
+        leftPrimaryMotor.set(ControlMode.PercentOutput, leftSpeed);
+        leftFollowerMotor.set(ControlMode.PercentOutput, leftSpeed);
+        
+        rightPrimaryMotor.set(ControlMode.PercentOutput, rightSpeed);
+        rightFollowerMotor.set(ControlMode.PercentOutput, rightSpeed);
     }
 
     @Override
     public void periodic() {
 
-        SmartDashboard.putNumber("Right Motor", rightMotors.getMotorOutputPercent());
-        SmartDashboard.putNumber("Left  Motor", leftMotors.getMotorOutputPercent());
+        SmartDashboard.putNumber("Right Motor", rightPrimaryMotor.getMotorOutputPercent());
+        SmartDashboard.putNumber("Left  Motor", leftPrimaryMotor.getMotorOutputPercent());
     }
 }
