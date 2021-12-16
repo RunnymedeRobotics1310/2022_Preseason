@@ -1,8 +1,10 @@
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
@@ -25,6 +27,8 @@ public class DriveSubsystem extends SubsystemBase {
         rightMotors.setInverted(DriveConstants.RIGHT_MOTOR_REVERSED);
 
     }
+
+    private AHRS navXGyro = new AHRS(Port.kMXP);
 
     /**
      * Gets the average distance of the two encoders.
@@ -60,6 +64,18 @@ public class DriveSubsystem extends SubsystemBase {
     public void setMotorSpeeds(double leftSpeed, double rightSpeed) {
         leftMotors.set(leftSpeed);
         rightMotors.set(rightSpeed);
+    }
+
+    public double getHeading() {
+
+        double angle = navXGyro.getAngle();
+        angle = angle % 360;
+
+        if (angle < 0) {
+            angle += 360.0d;
+        }
+
+        return angle;
     }
 
     @Override
