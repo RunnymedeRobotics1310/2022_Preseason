@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -9,12 +11,12 @@ import frc.robot.Constants.DriveConstants;
 public class IntakeSubsystem extends SubsystemBase {
 
     // The motors on the top part of the intake thing.
-    private final CANSparkMax intakeTopMotor = 
-    		new CANSparkMax(DriveConstants.INTAKE_TOP_MOTOR_ADDRESS, MotorType.kBrushless);
+    private final VictorSPX intakeTopMotor = 
+    		new VictorSPX(DriveConstants.INTAKE_TOP_MOTOR_ADDRESS);
     
     //The motors on the bottom part of the intake thing.
-    private final CANSparkMax intakeBottomMotor =
-    		new CANSparkMax(DriveConstants.INTAKE_BOTTOM_MOTOR_ADDRESS, MotorType.kBrushless);
+    private final VictorSPX intakeBottomMotor =
+    		new VictorSPX(DriveConstants.INTAKE_BOTTOM_MOTOR_ADDRESS);
   
 
     /** Creates a new IntakeSubsystem. */
@@ -60,8 +62,8 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void setMotorSpeed(double topSpeed, double bottomSpeed) {
-        intakeTopMotor.set(topSpeed);
-        intakeBottomMotor.set(bottomSpeed);
+        intakeTopMotor.set(VictorSPXControlMode.PercentOutput, topSpeed);
+        intakeBottomMotor.set(VictorSPXControlMode.PercentOutput, bottomSpeed);
     }
 
     @Override

@@ -2,7 +2,6 @@ package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.CarouselSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class DefaultIntakeCommand extends CommandBase {

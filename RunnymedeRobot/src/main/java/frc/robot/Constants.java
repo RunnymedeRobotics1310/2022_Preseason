@@ -24,7 +24,7 @@ public final class Constants {
 		public static final int INTAKE_TOP_MOTOR_ADDRESS = 30;
 		public static final int INTAKE_BOTTOM_MOTOR_ADDRESS = 31;
 		public static final boolean INTAKE_TOP_MOTOR_REVERSED = true;//maybe
-		public static final boolean INTAKE_BOTTOM_MOTOR_REVERSED = false;//don't know
+		public static final boolean INTAKE_BOTTOM_MOTOR_REVERSED = true;//don't know
 
         public static final int LEFT_MOTOR_ADDRESS = 10;
         public static final int RIGHT_MOTOR_ADDRESS = 20;
