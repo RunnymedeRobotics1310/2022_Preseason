@@ -35,6 +35,7 @@ public class DefaultDriveCommand extends CommandBase {
 
 		// What else to put here ladies and gentlemen?
 
+<<<<<<< HEAD
 		double leftY = -driverController.getRawAxis(1);
 		double rightY = -driverController.getRawAxis(5);
 <<<<<<< Updated upstream
@@ -46,20 +47,36 @@ public class DefaultDriveCommand extends CommandBase {
 		double leftT = -driverController.getRawAxis(2);
 		double rightT = -driverController.getRawAxis(3);
 >>>>>>> Stashed changes
+=======
+
+		double leftY = driverController.getRawAxis(1);
+		double leftX = driverController.getRawAxis(0);
+	//	double rightY = driverController.getRawAxis(5);
+	//	double leftT = driverController.getRawAxis(2);
+	//	double rightT = driverController.getRawAxis(3);
+		double leftSpeed = leftY*-1 + leftX;
+		double rightSpeed = leftY*-1 - leftX;
+
+>>>>>>> Maya
 		boolean boost = false;
 
 		if (driverController.getRawButton(5) || driverController.getRawButton(6)){
 			boost = true;
 		}
 		
-		if (leftT >0) {
-			leftSpeed = -leftT;
-			rightSpeed = leftT;
-		}
-		else if (rightT >0) {
-			leftSpeed = rightT;
-			rightSpeed = -rightT;
-		}
+
+//		Tank drive with spin and boost
+//		if (leftT >0) {
+//			leftSpeed = -leftT;
+//			rightSpeed = leftT;
+//		}
+//		else if (rightT >0) {
+//			leftSpeed = rightT;
+//			rightSpeed = -rightT;
+//		}
+//
+//		else 
+
 
 		if (!boost) {
 			//Not sure if this is a good speed!
