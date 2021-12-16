@@ -35,7 +35,6 @@ public class DefaultDriveCommand extends CommandBase {
 
 		// What else to put here ladies and gentlemen?
 
-<<<<<<< HEAD
 
 		double leftY = driverController.getRawAxis(1);
 		double leftX = driverController.getRawAxis(0);
@@ -45,19 +44,6 @@ public class DefaultDriveCommand extends CommandBase {
 		double leftSpeed = leftY*-1 + leftX;
 		double rightSpeed = leftY*-1 - leftX;
 
-=======
-		double leftY = -driverController.getRawAxis(1);
-		double rightY = -driverController.getRawAxis(5);
-<<<<<<< Updated upstream
-		double leftT = driverController.getRawAxis(2);
-		double rightT = driverController.getRawAxis(3);
-		double leftSpeed = leftY;
-		double rightSpeed = rightY;
-=======
-		double leftT = -driverController.getRawAxis(2);
-		double rightT = -driverController.getRawAxis(3);
->>>>>>> Stashed changes
->>>>>>> origin/zayan
 		boolean boost = false;
 
 		if (driverController.getRawButton(5) || driverController.getRawButton(6)){
