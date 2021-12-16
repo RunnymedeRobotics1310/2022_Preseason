@@ -9,6 +9,7 @@ public class DefaultCarouselCommand extends CommandBase {
 	private final CarouselSubsystem carouselSubsystem;
 	private final Joystick driverController;
 	private boolean carouselOn = false;
+	private boolean previousState = false;
 
 	/**
 	 * Creates a new ExampleCommand.
@@ -32,11 +33,19 @@ public class DefaultCarouselCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if(driverController.getRawButton(2))
+		if(driverController.getRawButton(2) && !previousState){
+			previousState = true;
 			carouselOn = !carouselOn;
+		}
+		else if(!driverController.getRawButton(2)){
+			previousState = false;
+		}
 
 		if(carouselOn) {
 			carouselSubsystem.setMotorSpeed(0.3);
+		}
+		else{
+			carouselSubsystem.setMotorSpeed(0);
 		}
 	}
 
