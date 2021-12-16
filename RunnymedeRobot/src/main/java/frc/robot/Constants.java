@@ -18,7 +18,7 @@ public final class Constants {
 
 	public static final class DriveConstants {
 
-		public static final int CAROUSEL__MOTOR_ADDRESS = 39;
+		public static final int CAROUSEL_MOTOR_ADDRESS = 39;
 		public static final boolean CAROUSEL_MOTOR_REVERSED = true;//maybe
 		
 		public static final int INTAKE_TOP_MOTOR_ADDRESS = 30;
