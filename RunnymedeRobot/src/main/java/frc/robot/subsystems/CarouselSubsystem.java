@@ -9,15 +9,15 @@ import frc.robot.Constants.DriveConstants;
 public class CarouselSubsystem extends SubsystemBase {
 
     // The motors on the left side of the drive.
-    private final CANSparkMax carouselMotor = 
-    		new CANSparkMax(DriveConstants.LEFT_MOTOR_ADDRESS, MotorType.kBrushless);
+    private final CANSparkMax carouselMotor =
+            new CANSparkMax(DriveConstants.CAROUSEL_MOTOR_ADDRESS, MotorType.kBrushless);
 
     /** Creates a new CarouselSubsystem. */
     public CarouselSubsystem() {
         // We need to invert one side of the drivetrain so that positive voltages
         // result in both sides moving forward. Depending on how your robot's
         // gearbox is constructed, you might have to invert the left side instead.
-    	//for carousel, this is unknown at the moment
+        //for carousel, this is unknown at the moment
         carouselMotor.setInverted(DriveConstants.CAROUSEL_MOTOR_REVERSED);//do we need a carousel motor reversed constant?
 
     }
