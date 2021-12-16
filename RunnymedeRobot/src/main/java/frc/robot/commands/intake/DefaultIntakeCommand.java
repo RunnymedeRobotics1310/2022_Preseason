@@ -33,7 +33,12 @@ public class DefaultIntakeCommand extends CommandBase {
 	@Override
 	public void execute() {
 		//TODO
-		
+		if (driverController.getRawButton(1) == true) {
+			intakeSubsystem.setMotorSpeed(0.5, 0.5);
+		}
+		else {
+			intakeSubsystem.setMotorSpeed(0, 0);
+		}
 	}
 
 	// Called once the command ends or is interrupted.
