@@ -12,8 +12,10 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants.OiConstants;
 import frc.robot.commands.carousel.DefaultCarouselCommand;
 import frc.robot.commands.drive.DefaultDriveCommand;
+import frc.robot.commands.intake.DefaultIntakeCommand;
 import frc.robot.subsystems.CarouselSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -27,6 +29,7 @@ public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
 	private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 	private final CarouselSubsystem carouselSubsystem = new CarouselSubsystem();
+	private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
 	// Instant Command is a placeholder command that does nothing
 	private final Command autonomousCommand = new InstantCommand();
@@ -42,7 +45,7 @@ public class RobotContainer {
 		// Initialize all Subsystem default commands.
 		driveSubsystem.setDefaultCommand(new DefaultDriveCommand(driverController, driveSubsystem));
 		carouselSubsystem.setDefaultCommand(new DefaultCarouselCommand(driverController, carouselSubsystem));
-
+		intakeSubsystem.setDefaultCommand(new DefaultIntakeCommand(driverController, intakeSubsystem));
 		// Configure the button bindings
 		configureButtonBindings();
 	}
